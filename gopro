@@ -52,12 +52,12 @@ mkdir videos/single
 mkdir videos/chaptered
 mkdir videos/thumbnails
 mkdir videos/lowresvideos
-cp ../GOPR*.MP4 videos/single
-cp ../GP*.MP4 videos/chaptered
-cp ../GOPR*.JPG photos/single
-cp ../G*.JPG timelapse-burst-continuous
-cp ../*.LRV videos/lowresvideos
-cp ../*.THM videos/thumbnails
+cp -p ../GOPR*.MP4 videos/single
+cp -p ../GP*.MP4 videos/chaptered
+cp -p ../GOPR*.JPG photos/single
+cp -p ../G*.JPG timelapse-burst-continuous
+cp -p ../*.LRV videos/lowresvideos
+cp -p ../*.THM videos/thumbnails
 echo "Finished!"
 }
 function help() {
