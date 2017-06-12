@@ -40,7 +40,6 @@ function trim(){
     ffmpeg -i $1 -ss $3 -t $4 -sameq -vcodec libx264 $2
 }
 
-
 function sort(){
 mkdir $1
 cd $1
