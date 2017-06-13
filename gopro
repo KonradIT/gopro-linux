@@ -4,7 +4,7 @@ function timelapse() {
     filename="$2"
     resolution_width="$3"
     resolution_height="$4"
-    ls -1tr > gopro_timelapse_list.txt
+    ls -1tr *.JPG > gopro_timelapse_list.txt
     mencoder -nosound -ovc lavc -lavcopts \
         vcodec=mpeg4:mbd=2:trell:autoaspect:vqscale=3 \
         -vf scale=$resolution_width:$resolution_height -mf type=jpeg:fps=$framerate \
@@ -20,7 +20,11 @@ function superview() {
 }
 
 function fisheye(){
-    mogrify -distort barrel "0 0 -0.3" *.JPG
+    for photo in *.JPG;
+	    do timestamp=`stat -c %y $photo`;
+	    mogrify -distort barrel "0 0 -0.3" $photo;
+	    touch -d "$timestamp" $photo;
+    done
 }
 
 function convert(){
@@ -51,12 +55,12 @@ mkdir videos/single
 mkdir videos/chaptered
 mkdir videos/thumbnails
 mkdir videos/lowresvideos
-cp GOPR*.MP4 videos/single
-cp GP*.MP4 videos/chaptered
-cp GOPR*.JPG photos/single
-cp G*.JPG timelapse-burst-continuous
-cp *.LRV videos/lowresvideos
-cp *.THM videos/thumbnails
+cp -p ../GOPR*.MP4 videos/single
+cp -p ../GP*.MP4 videos/chaptered
+cp -p ../GOPR*.JPG photos/single
+cp -p ../G*.JPG photos/timelapse-burst-continuous
+cp -p ../*.LRV videos/lowresvideos
+cp -p ../*.THM videos/thumbnails
 echo "Finished!"
 }
 function help() {
