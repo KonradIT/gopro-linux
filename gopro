@@ -4,7 +4,7 @@ function timelapse() {
     filename="$2"
     resolution_width="$3"
     resolution_height="$4"
-    ls -1tr > gopro_timelapse_list.txt
+    ls -1tr *.JPG > gopro_timelapse_list.txt
     mencoder -nosound -ovc lavc -lavcopts \
         vcodec=mpeg4:mbd=2:trell:autoaspect:vqscale=3 \
         -vf scale=$resolution_width:$resolution_height -mf type=jpeg:fps=$framerate \
