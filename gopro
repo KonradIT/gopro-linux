@@ -20,7 +20,11 @@ function superview() {
 }
 
 function fisheye(){
-    mogrify -distort barrel "0 0 -0.3" *.JPG
+    for photo in *.JPG;
+	    do timestamp=`stat -c %y $photo`;
+	    mogrify -distort barrel "0 0 -0.3" $photo;
+	    touch -d "$timestamp" $photo;
+    done
 }
 
 function convert(){
