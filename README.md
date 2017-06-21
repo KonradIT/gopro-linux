@@ -1,12 +1,12 @@
-#GoPro Linux Tool
+# GoPro Linux Tool
 
 Bash script which helps with post production for GoPro cameras in Linux, can be used as a replacement for GoPro Studio
 
-###Features:
+### Features:
 
-First run ``gopro`` to check if you have any missing dependencies (it relies on FFmpeg, imagemagick and mencoder)
+First run `gopro` to check if you have any missing dependencies (it relies on FFmpeg, imagemagick and mencoder)
 
-``gopro help`` will show:
+`gopro help` will show:
 
 ````
 - gopro timelapse [fps] [outfilename] [res width] [res height]
@@ -34,7 +34,7 @@ Example: gopro trim GOPR0553.MP4 Trimmed.mp4 00:05:04 00:07:43
 Sorts media, please execute in DCIM/XXXGOPRO!
 ````
 
-###Download/Install
+### Download/Install
 
     sudo curl https://raw.githubusercontent.com/KonradIT/gopro-linux/master/gopro > /usr/local/bin/gopro
 
