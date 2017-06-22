@@ -36,6 +36,7 @@ Sorts media, please execute in DCIM/XXXGOPRO!
 
 ### Download/Install
 
-    sudo curl https://raw.githubusercontent.com/KonradIT/gopro-linux/master/gopro > /usr/local/bin/gopro
+    sudo curl https://raw.githubusercontent.com/KonradIT/gopro-linux/master/gopro -o /usr/local/bin/gopro
+    sudo chmod +x /usr/local/bin/gopro
 
 Note, /usr/local/bin/ is for all users, ~/.bin/ is for current user.
