@@ -34,9 +34,15 @@ Example: gopro trim GOPR0553.MP4 Trimmed.mp4 00:05:04 00:07:43
 Sorts media, please execute in DCIM/XXXGOPRO!
 ````
 
-### Download/Install
+### Install
+
+#### Arch Linux package
+
+    git clone git@github.com:mickro/gopro-tools-arch-package.git
+    cd gopro-tools-arch-package
+    makepkg -si
+    
+#### mannually
 
     sudo curl https://raw.githubusercontent.com/KonradIT/gopro-linux/master/gopro -o /usr/local/bin/gopro
     sudo chmod +x /usr/local/bin/gopro
-
-Note, /usr/local/bin/ is for all users, ~/.bin/ is for current user.
