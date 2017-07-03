@@ -36,13 +36,21 @@ Sorts media, please execute in DCIM/XXXGOPRO!
 
 ### Install
 
-#### Arch Linux package
+#### [Arch Linux](https://www.archlinux.org/)
 
-    git clone git@github.com:mickro/gopro-tools-arch-package.git
-    cd gopro-tools-arch-package
-    makepkg -si
-    
-#### mannually
+Available as [AUR package](https://aur.archlinux.org/packages/gopro-tools-git/)
 
-    sudo curl https://raw.githubusercontent.com/KonradIT/gopro-linux/master/gopro -o /usr/local/bin/gopro
-    sudo chmod +x /usr/local/bin/gopro
+```
+git clone https://aur.archlinux.org/gopro-tools-git.git
+cd gopro-tools-git
+makepkg -si
+```
+
+#### mannually on Linux
+
+1. First install [FFmpeg](http://ffmpeg.org/), [imagemagick](http://www.imagemagick.org/) and [mencoder (now part of mplayer)](http://www.mplayerhq.hu/) for your distribution.
+2. Then run the folowing commands
+```
+sudo curl https://raw.githubusercontent.com/KonradIT/gopro-linux/master/gopro -o /usr/local/bin/gopro
+sudo chmod +x /usr/local/bin/gopro
+```
