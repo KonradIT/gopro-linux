@@ -38,12 +38,11 @@ Sorts media, please execute in DCIM/XXXGOPRO!
 
 #### [Arch Linux](https://www.archlinux.org/)
 
-A package is available on https://aur.archlinux.org/packages/gopro-tools-git/
+Available as [AUR package](https://aur.archlinux.org/packages/gopro-tools-git/)
 
     git clone https://aur.archlinux.org/gopro-tools-git.git
     cd gopro-tools-git
     makepkg -si
-
 
 #### mannually on Linux
 
