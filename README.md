@@ -34,9 +34,23 @@ Example: gopro trim GOPR0553.MP4 Trimmed.mp4 00:05:04 00:07:43
 Sorts media, please execute in DCIM/XXXGOPRO!
 ````
 
-### Download/Install
+### Install
 
-    sudo curl https://raw.githubusercontent.com/KonradIT/gopro-linux/master/gopro -o /usr/local/bin/gopro
-    sudo chmod +x /usr/local/bin/gopro
+#### [Arch Linux](https://www.archlinux.org/)
 
-Note, /usr/local/bin/ is for all users, ~/.bin/ is for current user.
+Available as [AUR package](https://aur.archlinux.org/packages/gopro-tools-git/)
+
+```
+git clone https://aur.archlinux.org/gopro-tools-git.git
+cd gopro-tools-git
+makepkg -si
+```
+
+#### mannually on Linux
+
+1. First install [FFmpeg](http://ffmpeg.org/), [imagemagick](http://www.imagemagick.org/) and [mencoder (now part of mplayer)](http://www.mplayerhq.hu/) for your distribution.
+2. Then run the folowing commands
+```
+sudo curl https://raw.githubusercontent.com/KonradIT/gopro-linux/master/gopro -o /usr/local/bin/gopro
+sudo chmod +x /usr/local/bin/gopro
+```
