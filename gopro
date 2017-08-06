@@ -27,6 +27,17 @@ function fisheye(){
     done
 }
 
+function fisheye_video(){
+	echo "https://gopro.com/help/articles/Question_Answer/HERO4-Field-of-View-FOV-Information"
+	echo -ne "HFOV: "; read hfov
+	echo -ne "VFOV: "; read vfov
+	echo -ne "DIAG: "; read diag
+	flength=`echo "$vfov/$hfov*$diag" | bc -l | head -n1 | cut -d "." -f1`
+	for video in *.MP4;
+		do name=`echo $video | cut -d'.' -f1`+S;
+		ffmpeg -i $video -vf "lenscorrection=cx=0.5:cy=0.5:k1=-0.$flenth:k2=-0.022" $name.corrected.MP4;
+	done
+}
 function convert(){
 for i in *.MP4;
     do name=`echo $i | cut -d'.' -f1`;
