@@ -56,23 +56,23 @@ function trim(){
 }
 
 function sort(){
-mkdir $1
-cd $1
-mkdir videos
-mkdir photos
-mkdir photos/single
-mkdir photos/timelapse-burst-continuous
-mkdir videos/single
-mkdir videos/chaptered
-mkdir videos/thumbnails
-mkdir videos/lowresvideos
-cp -p ../GOPR*.MP4 videos/single
-cp -p ../GP*.MP4 videos/chaptered
-cp -p ../GOPR*.JPG photos/single
-cp -p ../G*.JPG photos/timelapse-burst-continuous
-cp -p ../*.LRV videos/lowresvideos
-cp -p ../*.THM videos/thumbnails
-echo "Finished!"
+	mkdir $1
+	cd $1
+	mkdir videos
+	mkdir photos
+	mkdir photos/single
+	mkdir photos/timelapse-burst-continuous
+	mkdir videos/single
+	mkdir videos/chaptered
+	mkdir videos/thumbnails
+	mkdir videos/lowresvideos
+	cp -p ../GOPR*.MP4 videos/single
+	cp -p ../GP*.MP4 videos/chaptered
+	cp -p ../GOPR*.JPG photos/single
+	cp -p ../G*.JPG photos/timelapse-burst-continuous
+	cp -p ../*.LRV videos/lowresvideos
+	cp -p ../*.THM videos/thumbnails
+	echo "Finished!"
 }
 function help() {
     printf 'GoPro Tool for Linux OS\nAvailable commands:\n\n- gopro timelapse [fps] [outfilename] [res width] [res height]\nMakes a timelapse with pictures in the current folder, make sure to cd to a DCIM/XXXGOPRO folder!\nExample: gopro timelapse 30 goproTL.mp4 1920 1080\n\n- gopro superview\nApplies SuperView to all GoPro videos in the current dir\n\n- gopro fisheye\nFixes barrel distorsion to all GoPro pictures in the current folder\n\n- gopro convert\nConverts all GoPro MP4 videos to MPEG4 MOV videos for easy editing\n\n- gopro slowmo [video]\nReduces the speed in a High FPS GoPro Video\nExample: gopro slowmo GOPRO0553.MP4\n\n- gopro trim [input video] [output video] [HH:MM:SS start] [HH:MM:SS stop]\nTrims a video, use this to trim a slow motion video!\nExample: gopro trim GOPR0553.MP4 Trimmed.mp4 00:05:04 00:07:43\n\n- gopro sort\nSorts media, please execute in DCIM/XXXGOPRO!\n\nScript by Konrad Iturbe (@KonradIT on GitHub | @konrad_it on Twitter)\n'
