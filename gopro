@@ -58,14 +58,8 @@ function trim(){
 function sort(){
 	mkdir $1
 	cd $1
-	mkdir videos
-	mkdir photos
-	mkdir photos/single
-	mkdir photos/timelapse-burst-continuous
-	mkdir videos/single
-	mkdir videos/chaptered
-	mkdir videos/thumbnails
-	mkdir videos/lowresvideos
+	mkdir -p videos/{single,chaptered,thumbnails,lowresvideos}
+	mkdir -p photos/{single,timelapse-burst-continuous}
 	cp -p ../GOPR*.MP4 videos/single
 	cp -p ../GP*.MP4 videos/chaptered
 	cp -p ../GOPR*.JPG photos/single
