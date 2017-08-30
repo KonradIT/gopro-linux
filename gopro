@@ -20,11 +20,37 @@ function superview() {
 }
 
 function fisheye(){
-    for photo in *.JPG;
-	    do timestamp=`stat -c %y $photo`;
-	    mogrify -distort barrel "0 0 -0.3" $photo;
-	    touch -d "$timestamp" $photo;
-    done
+	#echo "https://gopro.com/help/articles/Question_Answer/HERO4-Field-of-View-FOV-Information"
+	echo -ne "Resolution:\n-[0] 4:3 Wide FOV\n-[1] 4:3 Medium FOV\n-[2] 4:3 Narrow FOV\nPhoto resolution: "; read res
+	vfov=0
+	hfov=0
+	diag=0
+	case $res in
+		0*)
+		hfov=94.4;
+		vfov=122.6;
+		diag=149.2;;
+		1*)
+		hfov=72.6;
+		vfov=94.4;
+		diag=115.7;;
+		2*)
+		hfov=49.1;
+		vfov=64.6;
+		diag=79.7;;
+	esac
+	flength=`echo "$vfov/$hfov*$diag" | bc -l | head -n1 | cut -d "." -f1`
+	if [ $1 = "" ]; then
+		for photo in *.JPG;
+		    do timestamp=`stat -c %y $photo`;
+		    mogrify -distort barrel "0.5 0.5 -0.$flength -0.022" $photo;
+		    touch -d "$timestamp" $photo;
+		done
+	else
+		timestamp=`stat -c %y $1`;
+		mogrify -distort barrel "0 0 -0.3" $1;
+		touch -d "$timestamp" $1;
+	fi
 }
 
 function fisheye_video(){
@@ -71,12 +97,7 @@ function fisheye_video(){
 	fi
 }
 function convert(){
-for i in *.MP4;
-    do name=`echo $i | cut -d'.' -f1`;
-    echo $name;
-    ffmpeg -loglevel 0 -i $i -q:a 1 -q:v 1 -vcodec mpeg4 $name.mov;
-done
-if [$1 = ""]; then
+	if [$1 = ""]; then
 		for i in *.MP4;
 		    do name=`echo $i | cut -d'.' -f1`;
 		    echo $name;
@@ -89,15 +110,20 @@ if [$1 = ""]; then
 	fi
 }
 
-function slowmo(){
-    ffmpeg -loglevel 0 -i $1 -r $1 -vf "setpts=($2/1)*PTS" -q:a 1 -q:v 1 -vcodec libx264 $2
-    echo "Video slowed down, use trim to trim the video"
+function speed(){
+    ffmpeg -loglevel 0 -i $1 -r $4 -vf "setpts=($3/1)*PTS" -q:a 1 -q:v 1 -vcodec libx264 $2
+    echo "finished $1"
 }
 
 function trim(){
     ffmpeg -loglevel 0 -i $1 -ss $3 -t $4 -q:a 1 -q:v 1 -vcodec libx264 $2
 }
 
+function merge(){
+	clips=${echo $1 | sed "s/,/\\n/g"}
+	echo $clips > temp.txt
+	#...
+}
 function sort(){
 	mkdir $1
 	cd $1
