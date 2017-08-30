@@ -48,7 +48,7 @@ function fisheye(){
 		done
 	else
 		timestamp=`stat -c %y $1`;
-		mogrify -distort barrel "0 0 -0.3" $1;
+		mogrify -distort barrel "0.5 0.5 -0.$flength -0.022" $1;
 		touch -d "$timestamp" $1;
 	fi
 }
