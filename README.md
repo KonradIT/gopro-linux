@@ -19,6 +19,9 @@ Applies SuperView to all GoPro videos in the current dir
 - gopro fisheye
 Fixes barrel distorsion to all GoPro pictures in the current folder
 
+- gopro fisheye_video [video]
+Fixes barrel distorsion on GoPro videos, [video] is optional, remove to apply to all mp4 videos in current dir
+
 - gopro convert
 Converts all GoPro MP4 videos to MPEG4 MOV videos for easy editing
 
@@ -46,7 +49,7 @@ cd gopro-tools-git
 makepkg -si
 ```
 
-#### mannually on Linux
+#### manually on Linux
 
 1. First install [FFmpeg](http://ffmpeg.org/), [imagemagick](http://www.imagemagick.org/) and [mencoder (now part of mplayer)](http://www.mplayerhq.hu/) for your distribution.
 2. Then run the folowing commands
@@ -54,3 +57,14 @@ makepkg -si
 sudo curl https://raw.githubusercontent.com/KonradIT/gopro-linux/master/gopro -o /usr/local/bin/gopro
 sudo chmod +x /usr/local/bin/gopro
 ```
+
+## TODO:
+
+- windows/mac version?
+- update camera firmware using [gopro_fw_dl](http://github.com/konradit/gopro_fw_dl)
+- flux
+- install kdenlive protune presets
+
+## Other software worth checking out:
+
+- https://github.com/encarsia/gpt

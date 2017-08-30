@@ -15,7 +15,7 @@ function superview() {
     for i in *.MP4;
         do name=`echo $i | cut -d'.' -f1`+S;
         echo $name;
-        ffmpeg -i $i -q:a 1 -q:v 1 -vcodec mpeg4 -acodec ac3 -aspect 16:9 -strict experimental $name.MP4
+        ffmpeg -loglevel 0 -i $i -q:a 1 -q:v 1 -vcodec mpeg4 -acodec ac3 -aspect 16:9 -strict experimental $name.MP4
     done
 }
 
@@ -28,31 +28,74 @@ function fisheye(){
 }
 
 function fisheye_video(){
-	echo "https://gopro.com/help/articles/Question_Answer/HERO4-Field-of-View-FOV-Information"
-	echo -ne "HFOV: "; read hfov
-	echo -ne "VFOV: "; read vfov
-	echo -ne "DIAG: "; read diag
+	#echo "https://gopro.com/help/articles/Question_Answer/HERO4-Field-of-View-FOV-Information"
+	echo -ne "Resolution:\n-[0] 4:3 Wide FOV\n-[1] 4:3 Medium FOV\n-[2] 4:3 Narrow FOV\n-[3] 16:9 Wide FOV\n-[4] 16:9 Medium FOV\n-[5] 16:9 Narrow FOV\nVideo resolution: "; read res
+	vfov=0
+	hfov=0
+	diag=0
+	case $res in
+		0*)
+		hfov=94.4;
+		vfov=122.6;
+		diag=149.2;;
+		1*)
+		hfov=72.6;
+		vfov=94.4;
+		diag=115.7;;
+		2*)
+		hfov=49.1;
+		vfov=64.6;
+		diag=79.7;;
+		3*)
+		hfov=69.5;
+		vfov=118.2;
+		diag=133.6;;
+		4*)
+		hfov=55;
+		vfov=94.4;
+		diag=73.6;;
+		5*)
+		hfov=37.2;
+		vfov=64.4;
+		diag=73.6;;
+	esac
 	flength=`echo "$vfov/$hfov*$diag" | bc -l | head -n1 | cut -d "." -f1`
-	for video in *.MP4;
-		do name=`echo $video | cut -d'.' -f1`+S;
-		ffmpeg -i $video -vf "lenscorrection=cx=0.5:cy=0.5:k1=-0.$flenth:k2=-0.022" $name.corrected.MP4;
-	done
+	if [ $1 = "" ]; then
+		for video in *.MP4;
+			do name=`echo $video | cut -d'.' -f1`_corrected;
+			ffmpeg -loglevel 0 -i $video -vf "lenscorrection=cx=0.5:cy=0.5:k1=-0.$flength:k2=-0.022" $name.mp4;
+		done
+	else
+		name=`echo $1 | cut -d'.' -f1`_corrected;
+		ffmpeg -loglevel 0 -i $1 -vf "lenscorrection=cx=0.5:cy=0.5:k1=-0.$flength:k2=-0.022" $name.mp4;
+	fi
 }
 function convert(){
 for i in *.MP4;
     do name=`echo $i | cut -d'.' -f1`;
     echo $name;
-    ffmpeg -i $i -q:a 1 -q:v 1 -vcodec mpeg4 $name.mov;
+    ffmpeg -loglevel 0 -i $i -q:a 1 -q:v 1 -vcodec mpeg4 $name.mov;
 done
+if [$1 = ""]; then
+		for i in *.MP4;
+		    do name=`echo $i | cut -d'.' -f1`;
+		    echo $name;
+		    ffmpeg -loglevel 0 -i $i -q:a 1 -q:v 1 -vcodec mpeg4 $name.mov;
+		done
+	else
+		name=`echo $1 | cut -d'.' -f1`;
+	   	echo $name;
+	    	ffmpeg -loglevel 0 -i $1 -q:a 1 -q:v 1 -vcodec mpeg4 $name.mov;
+	fi
 }
 
 function slowmo(){
-    ffmpeg -i $1 -r 25 -vf "setpts=(9.6/1)*PTS" -q:a 1 -q:v 1 -vcodec libx264 $2
+    ffmpeg -loglevel 0 -i $1 -r $1 -vf "setpts=($2/1)*PTS" -q:a 1 -q:v 1 -vcodec libx264 $2
     echo "Video slowed down, use trim to trim the video"
 }
 
 function trim(){
-    ffmpeg -i $1 -ss $3 -t $4 -q:a 1 -q:v 1 -vcodec libx264 $2
+    ffmpeg -loglevel 0 -i $1 -ss $3 -t $4 -q:a 1 -q:v 1 -vcodec libx264 $2
 }
 
 function sort(){
