@@ -1,1 +1,1 @@
-sudo mv gopro /usr/bin/gopro
+sudo cp gopro /usr/bin/gopro
