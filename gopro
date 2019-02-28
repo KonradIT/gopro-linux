@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 function timelapse() { 
     framerate="$1"
     filename="$2"
