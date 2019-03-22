@@ -231,10 +231,10 @@ function trim() {
 }
 
 function merge() {
-	for i in *.MP4; do
-		echo "file '$i'" >>temp.txt
-	done
-	ffmpeg -f concat -safe 0 -i temp.txt -c copy "$1"
+	LIST_FILE="$(mktemp)"
+	printf "file '$PWD/%s'\n" *.MP4 > $LIST_FILE
+	ffmpeg -f concat -safe 0 -i $LIST_FILE -c copy "$1"
+	rm $LIST_FILE
 }
 
 function stabilize() {
@@ -329,6 +329,9 @@ Available commands:
 - gopro trim [input video] [output video] [HH:MM:SS start] [HH:MM:SS stop]
 		>>Trims a video, use this to trim a slow motion video!
 		>>Example: gopro trim GOPR0553.MP4 Trimmed.mp4 00:05:04 00:07:43
+
+- gopro merge [output_video]
+		>>Merges all videos present in the current folder to [output_video].
 
 - gopro stabilize
 		>>Stabilizes video
