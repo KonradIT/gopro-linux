@@ -98,7 +98,7 @@ makepkg -si
 #### manually on Linux
 
 1. First install [FFmpeg](http://ffmpeg.org/), [imagemagick](http://www.imagemagick.org/) and [mencoder (now part of mplayer)](http://www.mplayerhq.hu/) for your distribution.
-2. Then run the folowing commands
+2. Then run the following commands
 ```
 sudo curl https://raw.githubusercontent.com/KonradIT/gopro-linux/master/gopro -o /usr/local/bin/gopro
 sudo chmod +x /usr/local/bin/gopro
