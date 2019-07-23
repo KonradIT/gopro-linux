@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+function get-output-filename {
+        # takes fileinput, returns fileoutput name; takes optional $2 argument to tack onto end of name
+        name="$(cut -d'.' -f1 <<<"$1")"
+        ext="$(cut -d'.' -f2 <<<"$1")"
+        echo "${name}_${2}.${ext}"
+}
+
 function timelapse() {
 	framerate="$1"
 	filename="$2"
@@ -238,9 +245,7 @@ function merge() {
 }
 
 function rotate90deg {
-        name="$(cut -d'.' -f1 <<<"$1")"
-        ext="$(cut -d'.' -f2 <<<"$1")"
-        fileout="${name}_rotated.${ext}"
+	fileout="$(get-output-filename ${1} rotated)"
         # use 'transpose=2' for counter-clockwise
         ffmpeg -i "$1" -filter:v transpose=1 -metadata:s:v rotate="" "$fileout"
 }
