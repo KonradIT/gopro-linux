@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+function get-output-filename {
+        # takes fileinput, returns fileoutput name; takes optional $2 argument to tack onto end of name
+        name="$(cut -d'.' -f1 <<<"$1")"
+        ext="$(cut -d'.' -f2 <<<"$1")"
+        echo "${name}_${2}.${ext}"
+}
+
 function timelapse() {
 	framerate="$1"
 	filename="$2"
@@ -216,6 +223,11 @@ function convert() {
 	fi
 }
 
+function convert-h265-to-h264 {
+        fileout="$(get-output-filename ${1} h264)"
+        ffmpeg -i "$1" -bsf:v h264_mp4toannexb -vcodec libx264 -c:a copy "$fileout"
+}
+
 function slowmo() {
 	ffmpeg -i "$1" -r 25 -vf "setpts=($3/1)*PTS" -q:a 1 -q:v 1 -vcodec libx264 "$2"
 	echo "Video slowed down, use trim to trim the video"
@@ -235,6 +247,12 @@ function merge() {
 	printf "file '$PWD/%s'\n" *.MP4 > $LIST_FILE
 	ffmpeg -f concat -safe 0 -i $LIST_FILE -c copy "$1"
 	rm $LIST_FILE
+}
+
+function rotate90deg {
+	fileout="$(get-output-filename ${1} rotated)"
+        # use 'transpose=2' for counter-clockwise
+        ffmpeg -i "$1" -filter:v transpose=1 -metadata:s:v rotate="" "$fileout"
 }
 
 function stabilize() {
@@ -305,6 +323,9 @@ function proxy() {
 function help() {
 	echo 'GoPro Tool for Linux OS
 Available commands:
+- gopro
+    >>Check for missing dependencies, e.g. ffmpeg, imagemagick and mencoder
+
 - gopro timelapse [fps] [outfilename] [res width] [res height]
 		>>Makes a timelapse with pictures in the current folder, make sure to cd to a DCIM/XXXGOPRO folder!
 		>>Example: gopro timelapse 30 goproTL.mp4 1920 1080
@@ -322,26 +343,33 @@ Available commands:
 - gopro convert
 		>>Converts all GoPro MP4 videos to MPEG4 MOV videos for easy editing
 
+- gopro convert-h265-to-h264 [input_video]
+		>>Converts videos with h.265 codecs to h.264
+		>>This is useful for backwards compatibility. Some videos recorded on HERO Black 7 devices cannot be played on older hardware until codecs are converted.
+
 - gopro slowmo [video]
 		>>Reduces the speed in a High FPS GoPro Video
 		>>Example: gopro slowmo GOPRO0553.MP4
 
-- gopro trim [input video] [output video] [HH:MM:SS start] [HH:MM:SS stop]
-		>>Trims a video, use this to trim a slow motion video!
+- gopro trim [input video] [output video] [HH:MM:SS start] [HH:MM:SS end]
+		>>Trims a video to start and end times
 		>>Example: gopro trim GOPR0553.MP4 Trimmed.mp4 00:05:04 00:07:43
 
 - gopro merge [output_video]
-		>>Merges all videos present in the current folder to [output_video].
+		>>Merges all videos present in the current folder to [output_video]
+
+- gopro rotate90deg [input_video]
+		>>Rotates video 90 degrees clockwise (edit 'translate=2' argument for counter-clockwise)
 
 - gopro stabilize
 		>>Stabilizes video
 		>>Example: gopro GOPRO0005.MP4 Stabilized.MP4
 
 - gopro sort
-		>>Sorts media, please execute in DCIM/XXXGOPRO!
+		>>Sorts media, please execute in DCIM/XXXGOPRO
 
 - gopro wifiinfo
-		>>Sets Wifi SSID and Password for HERO5, 6 cameras
+		>>Sets Wifi SSID and Password for HERO5, 6, 7 cameras
 
 - gopro gif
 		>>Makes gif from images in current dir
@@ -352,11 +380,10 @@ Available commands:
 		>>[move] = when finish editing, moves highres/*.MP4 to lowres/
 
 - gopro update
-		>>Updates this script.
+		>>Updates this script
 
 - gopro help
-		shows this message
-Script by Konrad Iturbe and GH contributors (@KonradIT on GitHub | @konrad_it on Twitter)'
+		>>show this usage message
 }
 
 echo "GoPro Tool for Linux"
