@@ -237,16 +237,12 @@ function merge() {
 	rm $LIST_FILE
 }
 
-function rotate90deg() {
-	name="$(cut -d'.' -f1 <<<"$1")"
-	ext="$(cut -d'.' -f2 <<<"$1")"
-	fileout="${name}_rotated${ext}"
-	echo "$fileout"
-	# use 'transpose=2' for counter-clockwise
-	#ffmpeg -i "$1" -filter:v transpose=1 -metadata:s:v rotate="" "$fileout"
-}
-
-
+function rotate90deg {
+        name="$(cut -d'.' -f1 <<<"$1")"
+        ext="$(cut -d'.' -f2 <<<"$1")"
+        fileout="${name}_rotated.${ext}"
+        # use 'transpose=2' for counter-clockwise
+        ffmpeg -i "$1" -filter:v transpose=1 -metadata:s:v rotate="" "$fileout"
 }
 
 function stabilize() {
