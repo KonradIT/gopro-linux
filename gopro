@@ -346,8 +346,8 @@ Available commands:
 		>>Merges all videos present in the current folder to [output_video]
 
 - gopro rotate90deg [input_video] [number_rotations]
-		>>Rotates video 90 degrees clockwise in intervals of 1, 2, or 3
-		>>Example: gopro rotate90deg GX00014.MP3 3
+		>>Rotates video 90 degrees clockwise (edit 'translate=2' argument for counter-clockwise)
+		>>Example: gopro rotate90deg GX00014.MP3
 
 - gopro stabilize
 		>>Stabilizes video
