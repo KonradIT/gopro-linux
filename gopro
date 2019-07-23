@@ -237,6 +237,18 @@ function merge() {
 	rm $LIST_FILE
 }
 
+function rotate90deg() {
+	name="$(cut -d'.' -f1 <<<"$1")"
+	ext="$(cut -d'.' -f2 <<<"$1")"
+	fileout="${name}_rotated${ext}"
+	echo "$fileout"
+	# use 'transpose=2' for counter-clockwise
+	#ffmpeg -i "$1" -filter:v transpose=1 -metadata:s:v rotate="" "$fileout"
+}
+
+
+}
+
 function stabilize() {
 	ffmpeg -i "$1" -vf deshake "$2"
 }
@@ -331,7 +343,11 @@ Available commands:
 		>>Example: gopro trim GOPR0553.MP4 Trimmed.mp4 00:05:04 00:07:43
 
 - gopro merge [output_video]
-		>>Merges all videos present in the current folder to [output_video].
+		>>Merges all videos present in the current folder to [output_video]
+
+- gopro rotate90deg [input_video] [number_rotations]
+		>>Rotates video 90 degrees clockwise in intervals of 1, 2, or 3
+		>>Example: gopro rotate90deg GX00014.MP3 3
 
 - gopro stabilize
 		>>Stabilizes video
