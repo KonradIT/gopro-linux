@@ -343,7 +343,7 @@ Available commands:
 - gopro convert
 		>>Converts all GoPro MP4 videos to MPEG4 MOV videos for easy editing
 
-- gopro convert-h265-toh264 [input_video]
+- gopro convert-h265-to-h264 [input_video]
 		>>Converts videos with h.265 codecs to h.264
 		>>This is useful for backwards compatibility. Some videos recorded on HERO Black 7 devices cannot be played on older hardware until codecs are converted.
 
