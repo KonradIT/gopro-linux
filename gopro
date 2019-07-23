@@ -323,6 +323,9 @@ function proxy() {
 function help() {
 	echo 'GoPro Tool for Linux OS
 Available commands:
+- gopro
+    >>Check for missing dependencies, e.g. ffmpeg, imagemagick and mencoder
+
 - gopro timelapse [fps] [outfilename] [res width] [res height]
 		>>Makes a timelapse with pictures in the current folder, make sure to cd to a DCIM/XXXGOPRO folder!
 		>>Example: gopro timelapse 30 goproTL.mp4 1920 1080
@@ -348,8 +351,8 @@ Available commands:
 		>>Reduces the speed in a High FPS GoPro Video
 		>>Example: gopro slowmo GOPRO0553.MP4
 
-- gopro trim [input video] [output video] [HH:MM:SS start] [HH:MM:SS stop]
-		>>Trims a video, use this to trim a slow motion video!
+- gopro trim [input video] [output video] [HH:MM:SS start] [HH:MM:SS end]
+		>>Trims a video to start and end times
 		>>Example: gopro trim GOPR0553.MP4 Trimmed.mp4 00:05:04 00:07:43
 
 - gopro merge [output_video]
@@ -363,10 +366,10 @@ Available commands:
 		>>Example: gopro GOPRO0005.MP4 Stabilized.MP4
 
 - gopro sort
-		>>Sorts media, please execute in DCIM/XXXGOPRO!
+		>>Sorts media, please execute in DCIM/XXXGOPRO
 
 - gopro wifiinfo
-		>>Sets Wifi SSID and Password for HERO5, 6 cameras
+		>>Sets Wifi SSID and Password for HERO5, 6, 7 cameras
 
 - gopro gif
 		>>Makes gif from images in current dir
@@ -377,11 +380,10 @@ Available commands:
 		>>[move] = when finish editing, moves highres/*.MP4 to lowres/
 
 - gopro update
-		>>Updates this script.
+		>>Updates this script
 
 - gopro help
-		shows this message
-Script by Konrad Iturbe and GH contributors (@KonradIT on GitHub | @konrad_it on Twitter)'
+		>>show this usage message
 }
 
 echo "GoPro Tool for Linux"
