@@ -223,6 +223,11 @@ function convert() {
 	fi
 }
 
+function convert-h265-to-h264 {
+        fileout="$(get-output-filename ${1} h264)"
+        ffmpeg -i "$1" -bsf:v h264_mp4toannexb -vcodec libx264 -c:a copy "$fileout"
+}
+
 function slowmo() {
 	ffmpeg -i "$1" -r 25 -vf "setpts=($3/1)*PTS" -q:a 1 -q:v 1 -vcodec libx264 "$2"
 	echo "Video slowed down, use trim to trim the video"
