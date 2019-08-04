@@ -384,7 +384,7 @@ Available commands:
 
 - gopro help
 		>>show this usage message
-}
+}'
 
 echo "GoPro Tool for Linux"
 echo "To see a list of commands and syntax available run: gopro help"
