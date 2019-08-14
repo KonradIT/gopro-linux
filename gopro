@@ -359,7 +359,7 @@ Available commands:
 		>>Merges all videos present in the current folder to [output_video]
 
 - gopro rotate90deg [input_video]
-		>>Rotates video 90 degrees clockwise (edit 'translate=2' argument for counter-clockwise)
+		>>Rotates video 90 degrees clockwise (edit "translate=2" argument for counter-clockwise)
 
 - gopro stabilize
 		>>Stabilizes video
@@ -383,8 +383,8 @@ Available commands:
 		>>Updates this script
 
 - gopro help
-		>>show this usage message
-}'
+		>>show this usage message'
+}
 
 echo "GoPro Tool for Linux"
 echo "To see a list of commands and syntax available run: gopro help"
