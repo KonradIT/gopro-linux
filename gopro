@@ -270,7 +270,7 @@ function sort() {
 		mv ./*.LRV videos/lowresvideos
 		mv ./*.THM videos/thumbnails
 	else
-		cp -p .GOPR*.MP4 videos/single
+		cp -p GOPR*.MP4 videos/single
 		cp -p GP*.MP4 videos/chaptered
 		cp -p GOPR*.JPG photos/single
 		cp -p G*.JPG photos/timelapse-burst-continuous
