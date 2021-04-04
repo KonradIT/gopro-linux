@@ -4,6 +4,10 @@ Various Linux Bash scripts and command line interface for processing media filme
 
 **New functions for GoPro HERO BLACK 7 devices.**
 
+<b style="color: red;">NOTICE:</b>
+
+This project has been deprectated, I will be adding most functions from this script to my new project [mmt](https://mmt.camera). MMT is cross compatible with Win/OSX/Linux since it's a Golang program. 
+
 ### Usage:
 
 ````
