@@ -63,6 +63,8 @@ function fisheye_video() {
 	#https://gopro.com/help/articles/Question_Answer/HERO5-Black-Field-of-View-FOV-Information
 	#http://www.kolor.com/wiki-en/action/view/Autopano_Video_-_Focal_length_and_field_of_view
 	#https://gopro.com/help/articles/question_answer/hero6-black-field-of-view-fov-information
+	#https://community.gopro.com/t5/es/Informaci-243-n-del-campo-de-visi-243-n-FOV-de-la-HERO7/ta-p/390377
+	
 
 	vfov=0
 	hfov=0
@@ -71,7 +73,7 @@ function fisheye_video() {
 	echo -ne "Camera:
 			-[0] HERO3
 			-[1] HERO4/5
-			-[2] HERO6
+			-[2] HERO6/7
 			>> Camera: "
 	read -r cam
 	case $cam in
